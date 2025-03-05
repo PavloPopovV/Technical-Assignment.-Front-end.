@@ -34,11 +34,11 @@ const SearchMeal = () => {
         
       </form>
       <div className={`absolute z-10 bg-white w-[100%]  ${ query.length ? 'max-h-[200px] overflow-y-auto': ""}`}>
-        <ul className="flex flex-col gap-2  ">
+        <ul className="flex flex-col gap-2">
           {isLoading ? (
-            <SearchMealSkeleton/>
-          ) : (data === null || !data.length) && query.length > 0 ? (
-            <span>Nothing found</span>
+            <SearchMealSkeleton />
+          ) : !Array.isArray(data) || data.length === 0 ? (
+            query.length > 0 ? <span>Nothing found</span> : null
           ) : (
             data.map((meal) => <SearchCard key={meal.idMeal} meal={meal} />)
           )}
